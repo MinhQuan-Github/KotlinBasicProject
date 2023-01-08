@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">kotlin_android_project1</string>
+    <string name="textview">TextView</string>
+    <string name="the_result_is">The result is:</string>
+    <string name="todo">TODO</string>
+    <string name="minusAction">TODO</string>
+    <string name="plusAction">TODO</string>
+</resources>
