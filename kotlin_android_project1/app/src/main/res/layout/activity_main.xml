@@ -8,11 +8,24 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_plus"
-        android:layout_width="178dp"
+        android:id="@+id/btn_multiply"
+        android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_arrow_multiply_24"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btn_divide"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_plus"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="@string/plusAction"
         android:focusable="true"
@@ -23,17 +36,31 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="@string/minusAction"
         android:focusable="true"
         app:backgroundTint="#FAFFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btn_multiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_horizontal_rule_24"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_divide"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_arrow_divide_24"
+        app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_horizontal_rule_24" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView2"
