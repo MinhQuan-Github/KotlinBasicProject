@@ -1,9 +1,9 @@
 package com.example.kotlin_android_project1
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlin_android_project1.databinding.ActivityMainBinding
@@ -48,10 +48,16 @@ class MainActivity : AppCompatActivity() {
             this.viewModel?.updateNumber(Operator.Divide)
         }
 
-        this.binding.listView.setOnItemLongClickListener { parent, view, position, id ->
+        this.binding.listView.setOnItemLongClickListener { _, _, position, _ ->
             this.arrayList?.removeAt(position)
             this.arrayAdapter?.notifyDataSetChanged()
             true
+        }
+
+        this.binding.listView.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("number_display", this.arrayList?.get(position).toString())
+            this.startActivity(intent)
         }
     }
 
