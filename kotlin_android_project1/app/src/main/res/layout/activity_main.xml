@@ -7,6 +7,11 @@
     android:background="#FFEB3B"
     tools:context=".MainActivity">
 
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_multiply"
         android:layout_width="55dp"
@@ -14,6 +19,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:contentDescription="@string/minusAction"
         android:src="@drawable/ic_baseline_arrow_multiply_24"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/btn_divide"
@@ -56,26 +62,12 @@
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:contentDescription="@string/minusAction"
         android:src="@drawable/ic_baseline_arrow_divide_24"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="334dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#5D1AD5"
-        android:text="@string/the_result_is"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_result"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_result"
@@ -90,20 +82,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.497" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
-        android:lines="1"
-        android:text="Họ và tên: Đỗ Minh Quân"
-        android:textColor="@color/purple_200"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
