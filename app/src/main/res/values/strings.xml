@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">kotlin_android_project2</string>
+    <string name="a">a:</string>
+    <string name="two_numbers">Two numbers</string>
+    <string name="b">b:</string>
+    <string name="history">History</string>
+</resources>
