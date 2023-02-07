@@ -9,6 +9,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlin_android_project2.Extension.Extension
@@ -30,94 +31,41 @@ class MainActivity : AppCompatActivity() {
         this.observeValue()
     }
 
-    fun loadData() {
+    private fun loadData() {
         val gson = Gson()
         val json = this.sharedPreferences?.getString("history",null)
         val type = object : TypeToken<ArrayList<String>>(){}.type
-        this.viewModel?.historyResult?.value = gson.fromJson(json,type) ?: ArrayList<String>()
+        this.viewModel?.setResult(gson.fromJson(json,type) ?: ArrayList())
     }
 
     @SuppressLint("CommitPrefEdits")
-    fun saveData() {
-        val data = this.viewModel?.historyResult?.value
+    private fun saveData() {
         val editor = this.sharedPreferences?.edit()
-        val gson = Gson()
-        val json = gson.toJson(data)
+        val json = Gson().toJson(this.viewModel?.getResult())
         editor?.putString("history", json)
         editor?.apply()
     }
 
-    fun initUI() {
+    private fun initUI() {
         this.binding = ActivityMainBinding.inflate(layoutInflater)
         this.setContentView(this.binding.root)
         this.sharedPreferences = this.getSharedPreferences("share_pref", Context.MODE_PRIVATE)
         this.viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         this.loadData()
-        this.arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, this.viewModel?.historyResult?.value ?: ArrayList<String>())
+        this.arrayAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            this.viewModel?.getResult() ?: ArrayList<String>()
+        )
         this.binding.lvStore.adapter = this.arrayAdapter
     }
 
     @SuppressLint("ServiceCast")
-    fun initAction() {
-        this.binding.btnPlus.setOnClickListener {
-            this.dismissKeyboard()
-            if (this.checkEmpty()) {
-                this.showToast()
-            } else {
-                this.viewModel?.calculate(
-                    this.binding.editTextA.text.toString(),
-                    this.binding.editTextB.text.toString(),
-                    Extension.Operator.Plus
-                )
-                this.arrayAdapter?.notifyDataSetChanged()
-                this.saveData()
-            }
-        }
-
-        this.binding.btnMinus.setOnClickListener {
-            this.dismissKeyboard()
-            if (this.checkEmpty()) {
-                this.showToast()
-            } else {
-                this.viewModel?.calculate(
-                    this.binding.editTextA.text.toString(),
-                    this.binding.editTextB.text.toString(),
-                    Extension.Operator.Minus
-                )
-                this.arrayAdapter?.notifyDataSetChanged()
-                this.saveData()
-            }
-        }
-
-        this.binding.btnMultiply.setOnClickListener {
-            this.dismissKeyboard()
-            if (this.checkEmpty()) {
-                this.showToast()
-            } else {
-                this.viewModel?.calculate(
-                    this.binding.editTextA.text.toString(),
-                    this.binding.editTextA.text.toString(),
-                    Extension.Operator.Multiply
-                )
-                this.arrayAdapter?.notifyDataSetChanged()
-                this.saveData()
-            }
-        }
-
-        this.binding.btnDivide.setOnClickListener {
-            this.dismissKeyboard()
-            if (this.checkEmpty()) {
-                this.showToast()
-            } else {
-                this.viewModel?.calculate(
-                    this.binding.editTextA.text.toString(),
-                    this.binding.editTextB.text.toString(),
-                    Extension.Operator.Divide
-                )
-                this.arrayAdapter?.notifyDataSetChanged()
-                this.saveData()
-            }
-        }
+    private fun initAction() {
+        this.setActionButton(this.binding.btnPlus, Extension.Operator.Plus)
+        this.setActionButton(this.binding.btnMinus, Extension.Operator.Minus)
+        this.setActionButton(this.binding.btnMultiply, Extension.Operator.Multiply)
+        this.setActionButton(this.binding.btnDivide, Extension.Operator.Divide)
 
         this.binding.editTextA.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -125,6 +73,23 @@ class MainActivity : AppCompatActivity() {
                 return@setOnEditorActionListener true
             }
             false
+        }
+    }
+
+    private fun setActionButton(button: Button, operator: Extension.Operator) {
+        button.setOnClickListener {
+            this.dismissKeyboard()
+            if (this.checkEmpty()) {
+                this.showToast()
+            } else {
+                this.viewModel?.calculate(
+                    this.binding.editTextA.text.toString(),
+                    this.binding.editTextB.text.toString(),
+                    operator
+                )
+                this.arrayAdapter?.notifyDataSetChanged()
+                this.saveData()
+            }
         }
     }
 
@@ -146,7 +111,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showToast() {
-        Toast.makeText(this@MainActivity, "Attention: a and b is not empty, please re-enter", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@MainActivity,
+            "Attention: a and b is not empty, please re-enter",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     @SuppressLint("ServiceCast")

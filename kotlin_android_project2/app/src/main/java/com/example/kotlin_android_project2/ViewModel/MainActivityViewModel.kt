@@ -15,16 +15,16 @@ class MainActivityViewModel: ViewModel() {
         val a_int = Integer.parseInt(a)
         val b_int = Integer.parseInt(b)
         if (operator == Extension.Operator.Plus) {
-            this.historyResult.value?.add("$a + $b = ${a_int + b_int}")
+            this.historyResult.value?.add(0, "$a + $b = ${a_int + b_int}")
         } else if (operator == Extension.Operator.Minus) {
-            this.historyResult.value?.add("$a - $b = ${a_int - b_int}")
+            this.historyResult.value?.add(0, "$a - $b = ${a_int - b_int}")
         } else if (operator == Extension.Operator.Multiply) {
-            this.historyResult.value?.add("$a * $b = ${a_int * b_int}")
+            this.historyResult.value?.add(0, "$a * $b = ${a_int * b_int}")
         } else if (operator == Extension.Operator.Divide) {
-            if (b_int.equals(0)) {
-                this.historyResult.value?.add("$a / $b = NaN")
+            if (b_int == 0) {
+                this.historyResult.value?.add(0, "$a / $b = NaN")
             } else {
-                this.historyResult.value?.add("$a / $b = ${a_int / b_int}")
+                this.historyResult.value?.add(0, "$a / $b = ${a_int * 1.0 / b_int}")
             }
         }
     }
