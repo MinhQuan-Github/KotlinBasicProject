@@ -5,29 +5,33 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Contact")
-class ContactModel(
+data class ContactModel(
     @PrimaryKey(autoGenerate = true)
-    private var id: Int,
+    val id: Int,
 
     @ColumnInfo
-    private var name: String,
+    var name: String?,
 
     @ColumnInfo
-    private var mobile: String,
+    var mobile: String?,
 
     @ColumnInfo
-    private var email: String
+    var email: String?
 ) {
     fun getID(): Int = id
-    fun setID(id: Int) { this.id = id }
 
-    fun getName(): String = name
+    @JvmName("getName1")
+    fun getName(): String? = name
+    @JvmName("setName1")
     fun setName(name: String) { this.name = name }
 
-    fun getMobile(): String = mobile
+    @JvmName("getMobile1")
+    fun getMobile(): String? = mobile
+    @JvmName("setMobile1")
     fun setMobile(mobile: String) { this.mobile = mobile }
 
-    fun getEmail(): String = email
+    @JvmName("getEmail1")
+    fun getEmail(): String? = email
+    @JvmName("setEmail1")
     fun setEmail(email: String) { this.email = email }
-
 }

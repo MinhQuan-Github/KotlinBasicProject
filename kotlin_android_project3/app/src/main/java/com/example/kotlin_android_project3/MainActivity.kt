@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
         this.contactAdapter?.notifyDataSetChanged()
 
 
-        this.appDatabase = AppDatabase.getInstance(applicationContext)
-        this.contactDao = this.appDatabase!!.contactDao()
+        this.appDatabase = AppDatabase
+        this.contactDao = this.appDatabase?.getInstance(applicationContext)?.contactDao()
 
         this.contactDao!!.insert(ContactModel(5, "", "", ""))
     }

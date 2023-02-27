@@ -64,6 +64,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:textSize="18sp"
+            android:textColor="@color/black"
             />
         </LinearLayout>
     <TextView
@@ -73,6 +74,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="-10dp"
         android:text="@string/mc_mr_m_m"
+        android:textColor="#b4c6cc"
         android:textSize="20sp"
         />
     <GridLayout
