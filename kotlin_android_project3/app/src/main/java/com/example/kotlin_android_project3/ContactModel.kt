@@ -9,29 +9,12 @@ data class ContactModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
-    @ColumnInfo
+    @ColumnInfo(name = "name")
     var name: String?,
 
-    @ColumnInfo
+    @ColumnInfo(name = "mobile")
     var mobile: String?,
 
-    @ColumnInfo
+    @ColumnInfo(name = "email")
     var email: String?
-) {
-    fun getID(): Int = id
-
-    @JvmName("getName1")
-    fun getName(): String? = name
-    @JvmName("setName1")
-    fun setName(name: String) { this.name = name }
-
-    @JvmName("getMobile1")
-    fun getMobile(): String? = mobile
-    @JvmName("setMobile1")
-    fun setMobile(mobile: String) { this.mobile = mobile }
-
-    @JvmName("getEmail1")
-    fun getEmail(): String? = email
-    @JvmName("setEmail1")
-    fun setEmail(email: String) { this.email = email }
-}
+)

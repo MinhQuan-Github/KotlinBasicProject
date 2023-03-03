@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">kotlin_android_project_5</string>
+    <string name="todo">TODO</string>
+    <string name="name">Name</string>
+    <string name="contacts">Contacts</string>
+    <string name="edit_contact">Edit Contact</string>
+    <string name="save">SAVE</string>
+</resources>

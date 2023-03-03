@@ -2,7 +2,11 @@ package com.example.kotlin_android_project3
 
 import android.content.Context
 import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteOpenHelper
+
+@Database(entities = [ContactModel::class], version = 1)
+abstract class MyRoomDatabase : RoomDatabase() {
+    abstract fun contactDao(): ContactDao
+}
 
 object AppDatabase {
     private var database: MyRoomDatabase? = null
@@ -21,9 +25,4 @@ object AppDatabase {
         }
         return database!!
     }
-}
-
-@Database(entities = [ContactModel::class], version = 1)
-abstract class MyRoomDatabase : RoomDatabase() {
-    abstract fun contactDao(): ContactDao
 }
