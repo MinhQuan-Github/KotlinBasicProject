@@ -9,4 +9,5 @@ interface DBService {
     fun updateContact(context: Context, contact: ContactModel): Int
     fun removeContact(context: Context, contact: ContactModel)
     fun getContact(context: Context, name: String): List<ContactModel>
+    fun getContact(context: Context, id: Int): ContactModel?
 }

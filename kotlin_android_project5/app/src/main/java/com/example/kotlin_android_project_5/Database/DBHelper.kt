@@ -14,7 +14,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, Constant.DB_NAME, nu
 
     override fun onCreate(db: SQLiteDatabase?) {
         val query =
-            "create table ${Constant.TABLE_NAME}(${Constant.ID} integer not null primary key autoincrement unique, ${Constant.NAME} text, ${Constant.MOBILE} text, ${Constant.EMAIL} text)"
+            "create table ${Constant.TABLE_NAME}(${Constant.ID} integer not null primary key autoincrement unique, ${Constant.NAME} text, ${Constant.MOBILE} text, ${Constant.EMAIL} text, ${Constant.PHOTO} BLOG)"
         db?.execSQL(query)
     }
 
@@ -95,5 +95,26 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, Constant.DB_NAME, nu
             } while (cursor.moveToNext())
         }
         return list
+    }
+
+    @SuppressLint("Recycle", "Range")
+    override fun getContact(context: Context, id: Int): ContactModel? {
+        val query = "SELECT * FROM ${Constant.TABLE_NAME} WHERE id = ?"
+        val database = this.readableDatabase
+
+        val cursor = database.rawQuery(query, arrayOf(id.toString()))
+
+        cursor.use {
+            if (it.moveToFirst()) {
+                return ContactModel(
+                    it.getInt(it.getColumnIndex("id")),
+                    it.getString(it.getColumnIndex("name")),
+                    it.getString(it.getColumnIndex("mobile")),
+                    it.getString(it.getColumnIndex("email"))
+                )
+            }
+        }
+
+        return null
     }
 }

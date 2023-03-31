@@ -8,4 +8,5 @@ object Constant {
     const val NAME = "name"
     const val MOBILE = "mobile"
     const val EMAIL = "email"
+    const val PHOTO = "photo"
 }
